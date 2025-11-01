@@ -1,0 +1,48 @@
+-- CreateTable
+CREATE TABLE "Post" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "body" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isPublished" BOOLEAN NOT NULL DEFAULT true,
+    "category" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "DraftExtra" (
+    "postId" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "draftBody" TEXT NOT NULL,
+    CONSTRAINT "DraftExtra_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Contact" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "AdminComment" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "comment" TEXT NOT NULL,
+    "hidden" BOOLEAN NOT NULL DEFAULT true
+);
+
+-- CreateTable
+CREATE TABLE "Secret" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "kind" TEXT NOT NULL,
+    "sflag" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Product" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "category_id" INTEGER NOT NULL,
+    "price" REAL NOT NULL DEFAULT 0,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
