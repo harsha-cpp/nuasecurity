@@ -1,0 +1,59 @@
+// Placeholder prisma schema
+// This file exists to satisfy the requested structure; adjust as needed later.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Post {
+  id           Int       @id @default(autoincrement())
+  title        String
+  body         String
+  createdAt    DateTime  @default(now())
+  isPublished  Boolean   @default(true)
+  category     String
+  // relations
+  draftExtra   DraftExtra?
+}
+
+model DraftExtra {
+  postId    Int    @id
+  draftBody String
+  post      Post   @relation(fields: [postId], references: [id])
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model AdminComment {
+  id      Int     @id @default(autoincrement())
+  comment String
+  hidden  Boolean @default(true)
+}
+
+model Secret {
+  id    Int    @id @default(autoincrement())
+  kind  String
+  sflag String
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  title       String
+  category_id Int
+  price       Float    @default(0)
+  createdAt   DateTime @default(now())
+}
+
+
+
