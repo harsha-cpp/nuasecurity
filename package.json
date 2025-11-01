@@ -1,0 +1,25 @@
+{
+  "name": "nuasecurity",
+  "private": true,
+  "workspaces": [
+    "web",
+    "services/int-flag-service"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=web",
+    "build": "npm run build --workspace=web",
+    "start": "npm run start --workspace=web",
+    "prisma:dev": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:seed": "node prisma/seed.js"
+  },
+  "devDependencies": {
+    "@prisma/client": "5.18.0",
+    "prisma": "5.18.0",
+    "dotenv": "16.4.5"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  }
+}
+
