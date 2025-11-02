@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./web
+    ports:
+      - "8081:3000"
+    volumes:
+      - ./flags/webroot-flag.txt:/var/www/flag.txt:ro
+    env_file:
+      - ./.env.flags
+    depends_on:
+      - xxe
+      - int-flag-service
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 512M
+
+  xxe:
+    build:
+      context: ./services/xxe
+    expose:
+      - "5000"
+    volumes:
+      - ./flags/etc-flag.txt:/etc/flag.txt:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+  int-flag-service:
+    build:
+      context: ./services/int-flag-service
+    expose:
+      - "8080"
+    env_file:
+      - ./.env.flags
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 64M
+
+volumes: {}
+networks: {}
+
+
+
