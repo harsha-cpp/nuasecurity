@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Premium dark theme - pure black base */
+  --background: 0 0% 2%;        /* pure black */
+  --foreground: 0 0% 98%;       /* crisp white */
+
+  --card: 0 0% 4%;              /* subtle black card */
+  --card-foreground: 0 0% 98%;
+
+  --popover: 0 0% 4%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 217 91% 60%;       /* premium blue */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 0 0% 8%;         /* dark gray */
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 0 0% 12%;            /* muted dark */
+  --muted-foreground: 0 0% 60%; /* muted text */
+
+  --accent: 217 91% 60%;        /* accent blue */
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 0 0% 15%;           /* subtle border */
+  --input: 0 0% 15%;            /* input border */
+  --ring: 217 91% 60%;          /* focus ring */
+
+  --radius: 0.75rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: hsl(var(--foreground, 0 0% 98%));
+  background-color: hsl(var(--background, 0 0% 2%));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .message-html b {
+    @apply font-bold text-white;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-card/80 border border-border rounded-2xl shadow-2xl;
+  }
+
+  .glass-navbar {
+    @apply backdrop-blur-md bg-card/60 border-b border-border;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60;
+  }
+
+  /* legacy utility compatibility to avoid breaking existing pages */
+  .btn-primary {
+    @apply inline-flex items-center justify-center h-10 px-4 py-2 rounded-md bg-primary text-primary-foreground shadow transition-colors hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center h-10 px-4 py-2 rounded-md bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .input-field {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+
