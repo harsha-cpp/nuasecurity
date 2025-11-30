@@ -1,0 +1,59 @@
+1) SQL Injection
+
+Direct integer injection via an API query parameter used unsafely in a SQL WHERE id = ... expression.
+
+String-based injection in a search endpoint using LIKE '%...%' built by concatenating user input into the SQL string.
+
+2) Cross-Site Scripting (XSS)
+
+Reflected XSS: search results or query echo rendered into server-side or client-side HTML without escaping.
+
+Stored XSS: user-submitted message saved to the DB and displayed later in an admin UI or public page without sanitization.
+
+3) Server-Side Template Injection (SSTI)
+
+Email/template rendering that interpolates user-provided values into server templates which support expressions.
+
+Customizable feed/title rendering where a user-controlled value is processed by the server-side template engine.
+
+4) Vulnerable Components / Dependencies
+
+Outdated server-side email or utility package with a known remote code execution vulnerability.
+
+Old client-side library version with a known DOM/selector XSS or parsing bug used in the frontend.
+
+5) Insecure Direct Object References (IDOR)
+
+Fetching draft content by a numeric ID without verifying the requester’s permissions/ownership.
+
+Viewing or editing comments by passing a comment ID without access checks, exposing hidden/admin-only content.
+
+6) XML External Entity (XXE)
+
+Server endpoint accepting XML uploads/imports and parsing them with external entity resolution enabled.
+
+An alternate XML-based API accepting user XML payloads that are parsed without disabling DTDs or external entities.
+
+7) Path Traversal / Unsafe file access
+
+Serving or loading images using a user-provided filename/path that isn’t validated or normalized.
+
+Dynamic template/resource loader that concatenates user input into a filesystem path and reads it directly.
+
+8) Sensitive Data Exposure
+
+Publicly accessible configuration or backup file (containing secrets) accidentally served by the app.
+
+Debug or diagnostics endpoint that prints stack, environment variables, or credentials in responses.
+
+9) Server-Side Request Forgery (SSRF)
+
+URL-preview or fetch endpoint that retrieves arbitrary remote URLs from user input without allowlisting.
+
+Webhook/callback handler that accepts a callback URL and the server makes a request to that URL without validation.
+
+10) Open Redirect
+
+Redirect endpoint that takes a return or next URL from the query and redirects there without validation.
+
+Affiliate/forwarding endpoint that maps a short param to an external URL and forwards users to unvalidated targets.

@@ -1,0 +1,55 @@
+{
+  "info": {
+    "name": "NuaSecurity_TrainingApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "UI Pages",
+      "item": [
+        { "name": "Home", "request": { "method": "GET", "url": "http://localhost:3000/" } },
+        { "name": "Post 1", "request": { "method": "GET", "url": "http://localhost:3000/post/1" } },
+        { "name": "Search", "request": { "method": "GET", "url": "http://localhost:3000/search" } },
+        { "name": "About", "request": { "method": "GET", "url": "http://localhost:3000/about" } },
+        { "name": "Contact (GET)", "request": { "method": "GET", "url": "http://localhost:3000/contact" } },
+        { "name": "Archive", "request": { "method": "GET", "url": "http://localhost:3000/archive" } },
+        { "name": "Category technology", "request": { "method": "GET", "url": "http://localhost:3000/category/technology" } },
+        { "name": "RSS", "request": { "method": "GET", "url": "http://localhost:3000/feed.xml" } },
+        { "name": "Admin Messages", "request": { "method": "GET", "url": "http://localhost:3000/admin/messages" } },
+        { "name": "System", "request": { "method": "GET", "url": "http://localhost:3000/system" } },
+        { "name": "Redirect Success", "request": { "method": "GET", "url": "http://localhost:3000/redirect-success?message=Success" } }
+      ]
+    },
+    {
+      "name": "APIs",
+      "item": [
+        { "name": "Posts (list)", "request": { "method": "GET", "url": "http://localhost:3000/api/posts" } },
+        { "name": "Post by ID", "request": { "method": "GET", "url": "http://localhost:3000/api/posts/1" } },
+        { "name": "Search (safe)", "request": { "method": "GET", "url": "http://localhost:3000/api/search?q=hello" } },
+        { "name": "Contact (safe)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Tester\",\n  \"email\": \"tester@example.com\",\n  \"message\": \"<b>hello</b>\"\n}" }, "url": "http://localhost:3000/api/contact" } },
+        { "name": "Admin Messages (list)", "request": { "method": "GET", "url": "http://localhost:3000/api/admin/messages" } },
+        { "name": "Admin Comment (IDOR)", "request": { "method": "GET", "url": "http://localhost:3000/api/admin/comments/1" } },
+        { "name": "Files View (safe)", "request": { "method": "GET", "url": "http://localhost:3000/api/files/view?path=README.md" } },
+        { "name": "Themes Render (safe)", "request": { "method": "GET", "url": "http://localhost:3000/api/themes/render?name=default" } },
+        { "name": "Preview (SSRF safe)", "request": { "method": "GET", "url": "http://localhost:3000/api/preview?url=http://example.com" } },
+        { "name": "Webhook Validate (SSRF safe)", "request": { "method": "POST", "url": "http://localhost:3000/api/webhook/validate?callback=http://example.com/ok" } },
+        { "name": "Debug", "request": { "method": "GET", "url": "http://localhost:3000/api/debug" } },
+        { "name": "About API", "request": { "method": "GET", "url": "http://localhost:3000/api/about" } },
+        { "name": "Archive (filter)", "request": { "method": "GET", "url": "http://localhost:3000/api/archive?month=1&year=2025" } },
+        { "name": "Category API", "request": { "method": "GET", "url": "http://localhost:3000/api/categories/technology" } }
+      ]
+    },
+    {
+      "name": "Vulnerabilities (Safe Probes)",
+      "item": [
+        { "name": "SQLi/Reflected XSS probe", "request": { "method": "GET", "url": "http://localhost:3000/api/search?q=hello" } },
+        { "name": "Stored XSS (safe)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Tester\",\n  \"email\": \"tester@example.com\",\n  \"message\": \"<b>hello</b>\"\n}" }, "url": "http://localhost:3000/api/contact" } },
+        { "name": "Path Traversal (safe file)", "request": { "method": "GET", "url": "http://localhost:3000/api/files/view?path=README.md" } },
+        { "name": "SSRF (safe)", "request": { "method": "GET", "url": "http://localhost:3000/api/preview?url=http://example.com" } },
+        { "name": "Open Redirect (safe)", "request": { "method": "GET", "url": "http://localhost:3000/redirect?to=/redirect-success?message=Success" } }
+      ]
+    }
+  ]
+}
+
+
